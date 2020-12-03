@@ -12,7 +12,7 @@ class ProfitableGamble {
 		System.out.printf("Результат: %b", profitableGamble(prob, prize, pay));
 	}
 
-	public static String operation(double N, double a, double b) {
+	public static boolean profitableGamble(double prob, double prize, double pay) {
 		return prob * prize > pay;
 	}
 }

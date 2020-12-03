@@ -5,7 +5,7 @@ class RemainderOfDivision {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Введите первое число: ");
 		int a = input.nextInt();
-		System.out.println("Введите первое число: ");
+		System.out.println("Введите второе число: ");
 		int b = input.nextInt();
 		input.close();
 		System.out.printf("Остаток от деления %d", remainder(a, b));
