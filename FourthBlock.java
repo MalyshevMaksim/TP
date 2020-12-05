@@ -3,10 +3,12 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Integer;
 
 public class FourthBlock {
     public static void main(String[] args) {
-        System.out.println(toStarShorthand("77777geff"));
+        
     }
 
     public static String essayFormated(int n, int k, String text) {
@@ -128,6 +130,45 @@ public class FourthBlock {
         return res;
     }
 
+    public static String overTime(double[] array)
+	{
+        double standartBegin = 9;
+        double standartEnd = 17;
+
+        double begin = array[0];
+        double end = array[1];
+        double workingRate = array[2];
+        double multiplier = array[3];
+        double overTime = 0;
+        double reg = 0;
+
+        if (begin < standartBegin && end < standartBegin)
+			overTime = end - begin;
+		else if (begin < standartBegin && end >= standartBegin && end <= standartEnd)
+		{
+			overTime = standartBegin - begin;
+			reg = end - standartBegin;
+		}
+		else if (begin < standartBegin && end > standartEnd)
+		{
+			overTime = standartBegin - begin + end - standartEnd;
+			reg = standartBegin + standartEnd;
+		}
+		else if (begin >= standartBegin && begin <= standartEnd && end >= standartBegin && end <= standartEnd)
+		{
+			reg = end - begin;
+		}
+		else if (begin >= standartBegin && begin <= standartEnd && end > standartEnd)
+		{
+			reg = standartEnd - begin;
+			overTime = end - standartEnd;
+		}
+		else
+            overTime = end - begin;
+
+        return "$" + Double.toString(reg * workingRate + overTime * workingRate * multiplier);
+	}
+
     public static int bugger(int n)
 	{
 		int count = 0;
@@ -178,30 +219,99 @@ public class FourthBlock {
         }
         return result;
     }
-    
+
+    public static boolean doesRhyme(String a, String b) {
+        String vowels = "EYUUOA";
+
+        String firstLastWord = a.substring(a.lastIndexOf(" ") + 1);
+        String secondLastWord = b.substring(b.lastIndexOf(" ") + 1);
+
+        ArrayList<String> firstVowels = new ArrayList<String>();
+        ArrayList<String> secondVowels = new ArrayList<String>();
+
+        for(int i = 0; i < firstLastWord.length(); i++) {
+            if(vowels.contains(Character.toString(firstLastWord.charAt(i))) || vowels.contains(Character.toString(firstLastWord.charAt(i)).toUpperCase())) {
+                String k = Character.toString(firstLastWord.charAt(i)).toUpperCase();
+                firstVowels.add(k);
+            }
+        }
+        for(int i = 0; i < secondLastWord.length(); i++) {
+            if(vowels.contains(Character.toString(secondLastWord.charAt(i))) || vowels.contains(Character.toString(secondLastWord.charAt(i)).toUpperCase())) {
+                String k = Character.toString(secondLastWord.charAt(i)).toUpperCase();
+                secondVowels.add(k);
+            }
+        }
+
+        if(secondVowels.size() != firstVowels.size()) {
+            return false;
+        }
+
+        for(int i = 0; i < firstVowels.size(); i++) {
+            if(!secondVowels.contains(firstVowels.get(i)))
+                return false;
+            else 
+                secondVowels.remove(firstVowels.get(i));
+        }
+        return true;
+    }
+
     public static boolean trouble(int a, int b)
 	{
 		String str1 = Integer.toString(a);
 		String str2 = Integer.toString(b);
-		char number = '\0';
-		int count = 0;
+		int counter = 0;
 		
-		for (int i = 0; i < str1.length(); i++)
+		for (int i = 0; i < str1.length() - 1; i++)
 		{
-			char ch = str1.charAt(i);
-			if (ch == number)
-				count++;
-			else
-			{
-				number = ch;
-				count = 0;
-			}
-			if (count == 2)
-				if (str2.indexOf(String.copyValueOf(new char[] { number, number })) != -1)
-					return true;
-				else
-					count = 0;
+            if(str1.charAt(i) == str1.charAt(i + 1)) 
+                ++counter;
+            else
+            {   
+                if(counter == 2) {
+                    counter = 0;
+                    for(int j = 0; j < str2.length() - 1; j++) {
+                        if(str1.charAt(i) == str2.charAt(j) && str2.charAt(j) == str2.charAt(j + 1))
+                            return true;
+                        else
+                            counter = 0;
+                    }
+                }
+                else {
+                    counter = 0;
+                }
+            }
 		}
 		return false;
-	}
+    }
+    
+    public static int countUniqueBooks(String a, Character b) {
+
+        ArrayList<String> substrings = new ArrayList<String>();
+        HashSet<Character> characrers = new HashSet<Character>();
+
+        int firstIndex = 0;
+        int lastIndex = 0;
+        int iterator = 0;
+        int count = 0;
+
+        while(true) {
+            firstIndex = a.substring(iterator, a.length()).indexOf(Character.toString(b));
+            lastIndex = a.substring(iterator + firstIndex + 1, a.length()).indexOf(Character.toString(b));
+
+            if(lastIndex == -1)
+                break;
+
+            String substr = a.substring(iterator + firstIndex + 1, iterator + firstIndex + lastIndex + 1);
+            substrings.add(substr);
+            iterator += firstIndex + lastIndex + 2;
+        }
+
+        for(String subs: substrings) {
+            for(int i = 0; i < subs.length(); i++)
+                characrers.add(subs.charAt(i));
+            count += characrers.size();
+            characrers.clear();
+        }
+        return count;
+    }
 }
