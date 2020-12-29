@@ -4,11 +4,64 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Integer;
+//import java.util.Integer;
 
 public class FourthBlock {
     public static void main(String[] args) {
-        
+        System.out.println();
+        Scanner in = new Scanner(System.in);
+
+        // Первая задача
+        System.out.println("Первая задача");
+        System.out.println(essayFormated(10, 7, "hello my name is Bessie and this is my essay"));
+        System.out.println();
+
+        // Вторая задача
+        System.out.println("Вторая задача");
+        System.out.println(split("()()()(())"));
+        System.out.println();
+
+        // Третья задача
+        System.out.println("Третья задача");
+        System.out.println(toCamelCase("to_cammel_case"));
+        System.out.println(toSnakeCase("toSnakeCase"));
+        System.out.println();
+
+        // Четвертая задача
+        System.out.println("Четвертая задача");
+        double[] arr = new double[] {9, 17, 30, 1.5};
+        System.out.println(overTime(arr));
+        System.out.println();
+
+        // Пятая задача
+        System.out.println("Пятая задача");
+        System.out.println(BMI(55, 1.65));
+        System.out.println();
+
+        // Шестая задача
+        System.out.println("Шестая задача");
+        System.out.println(bugger(999));
+        System.out.println();
+
+        // Седьмая задача
+        System.out.println("Седьмая задача");
+        System.out.println(toStarShorthand("abbccc"));
+        System.out.println();
+
+        // Восьмая задача
+        System.out.println("Восьмая задача");
+        System.out.println(doesRhyme("Sam I am!", "Green eggs and HAM"));
+        System.out.println();
+
+        // Девятая задача
+        System.out.println("Девятая задача");
+        System.out.println(trouble(666789, 12345667));
+        System.out.println();
+
+        // Десятая задача
+        System.out.println("Десятая задача");
+        System.out.println(countUniqueBooks("$AA$BBCATT$C$$B$", '$'));
+        System.out.println();
     }
 
     public static String essayFormated(int n, int k, String text) {
@@ -116,17 +169,11 @@ public class FourthBlock {
         String res = String.format("%.1f", val);
 
         if (val < 18.5)
-        {
-            res += "Underweight";
-        }
+            res += " Underweight";
         else if (val >= 18.5 && val < 25)
-        {
-            res += "Normal weight";
-        }
+            res += " Normal weight";
         else
-        {
-            res += "Overweight";
-        }
+            res += " Overweight";
         return res;
     }
 
@@ -140,7 +187,7 @@ public class FourthBlock {
         double workingRate = array[2];
         double multiplier = array[3];
         double overTime = 0;
-        double reg = 0;
+        double reg = 1;
 
         if (begin < standartBegin && end < standartBegin)
 			overTime = end - begin;
@@ -180,9 +227,7 @@ public class FourthBlock {
             int val = 1;
             
 			for (int i = 0; i < str.length(); i++)
-			{
 				val *= Integer.parseInt((str.substring(i, i+1)));
-			}
 			str = Integer.toString(val);
 		}
 		return count;
@@ -287,7 +332,6 @@ public class FourthBlock {
     public static int countUniqueBooks(String a, Character b) {
 
         ArrayList<String> substrings = new ArrayList<String>();
-        HashSet<Character> characrers = new HashSet<Character>();
 
         int firstIndex = 0;
         int lastIndex = 0;
@@ -305,6 +349,8 @@ public class FourthBlock {
             substrings.add(substr);
             iterator += firstIndex + lastIndex + 2;
         }
+
+        HashSet<Character> characrers = new HashSet<Character>();
 
         for(String subs: substrings) {
             for(int i = 0; i < subs.length(); i++)
